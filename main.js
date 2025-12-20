@@ -203,4 +203,30 @@ window.addEventListener('load', () => {
     if (homeLink) homeLink.classList.add('active');
 });
 
+// ==================== TYPING EFFECT ====================
+function typeWriter(element, text, speed = 100) {
+    let i = 0;
+    element.innerHTML = '<span class="cursor">|</span>';
+    function type() {
+        if (i < text.length) {
+            element.innerHTML = text.substring(0, i + 1) + '<span class="cursor">|</span>';
+            i++;
+            setTimeout(type, speed);
+        } else {
+            // Wait 3 seconds then restart
+            setTimeout(() => {
+                typeWriter(element, text, speed);
+            }, 3000);
+        }
+    }
+    type();
+}
+
+// Start typing effect for About section
+const aboutText = "I'm a passionate developer who loves creating beautiful and functional web experiences. With expertise in modern web technologies, I help businesses bring their ideas to life.";
+const aboutElement = document.getElementById('about-text');
+if (aboutElement) {
+    typeWriter(aboutElement, aboutText, 50);
+}
+
 console.log('Portfolio loaded successfully! 🚀');
