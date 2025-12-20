@@ -205,12 +205,17 @@ body {
 .main-content-top {
     margin-left: 0;
 }
+#home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 0;
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -224,9 +229,23 @@ body {
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 50px 50px;
+    min-height: calc(100vh - 70px);
+    justify-content: space-between;
 }
 
-.hero-content h1 {
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left;
+}
+
+.hero-text h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -236,10 +255,14 @@ body {
     background-clip: text;
 }
 
-.hero-content p {
-    font-size: 1.5rem;
+.hero-text p {
+    font-size: 2rem;
     color: var(--text-light);
     margin-bottom: 2rem;
+}
+
+.hero-image {
+    flex: 0 0 250px;
 }
 
 .cta-button {
@@ -262,7 +285,7 @@ body {
 
 .section-title {
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     text-align: center;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
@@ -271,17 +294,29 @@ body {
 }
 
 /* ==================== ABOUT SECTION ==================== */
+#about {
+    padding-top: 25px;
+}
+
 .about-content {
     max-width: 600px;
     text-align: center;
-    margin-bottom: 10rem;
+    margin-bottom: .5rem;
 }
 
 .about-content p {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     line-height: 1.8;
     color: var(--text-light);
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+
+
+.profile-photo:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-hover);
+    transform: scale(1.05);
 }
 
 .cursor {
@@ -302,6 +337,24 @@ body {
     max-width: 600px;
     margin: 0 auto;
 }
+
+
+
+/* ensure profile-photo stays circular and overlaps sections */
+.profile-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: contain;
+    background-color: var(--bg-light);
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    margin: 0;
+    box-shadow: var(--shadow);
+    display: block;
+}
+
+
 
 .skill-item {
     height: auto;
@@ -531,14 +584,15 @@ body {
 
 /* Kotak preview */
 .preview-container {
+    padding: 10px;
     width: 100%;           /* sesuai layout project card */
     height: 200px;          /* tinggi kotak yang terlihat */
     overflow: hidden;       /* sembunyikan bagian gambar di luar kotak */
     border-radius: 8px;
-    border: 1px solid #ccc;
 }
 
-.preview-image { 
+.preview-image {
+    border-radius: 8px;
     width:100%; 
     transition: transform 5s linear; 
 }
@@ -927,5 +981,25 @@ body {
 
     .skills {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-image {
+        order: -1;
+        margin-bottom: 1rem;
+    }
+
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
+    .hero-text p {
+        font-size: 1.5rem;
     }
 }

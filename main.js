@@ -223,7 +223,7 @@ function typeWriter(element, text, speed = 100) {
 }
 
 // Start typing effect for About section
-const aboutText = "I'm a passionate developer who loves creating beautiful and functional web experiences. With expertise in modern web technologies, I help businesses bring their ideas to life.";
+const aboutText = "I'm a passionate developer who loves creating beautiful websites. With expertise in modern web technologies, I help businesses bring their ideas to life.";
 const aboutElement = document.getElementById('about-text');
 if (aboutElement) {
     typeWriter(aboutElement, aboutText, 50);
