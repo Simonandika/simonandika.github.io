@@ -69,17 +69,23 @@ function checkPage() {
 }
 
 function show404Page() {
-    notFoundPage.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    if (notFoundPage) {
+        notFoundPage.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function hide404Page() {
-    notFoundPage.classList.remove('show');
-    document.body.style.overflow = 'auto';
-    window.location.hash = '#home';
+    if (notFoundPage) {
+        notFoundPage.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        window.location.hash = '#home';
+    }
 }
 
-backHomeBtn.addEventListener('click', hide404Page);
+if (backHomeBtn) {
+    backHomeBtn.addEventListener('click', hide404Page);
+}
 
 // Check page on load and hash change
 window.addEventListener('load', checkPage);
@@ -132,7 +138,9 @@ projectCards.forEach((card, index) => {
     
     // Trigger animation when card is hovered
     card.addEventListener('mouseenter', () => {
-        highlight.style.animation = 'slideUp 0.4s ease';
+        if (highlight) {
+            highlight.style.animation = 'slideUp 0.4s ease';
+        }
     });
 });
 

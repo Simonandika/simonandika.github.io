@@ -286,19 +286,84 @@ body {
 }
 
 .skill-item {
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
     background-color: var(--bg-gray);
     border-radius: 8px;
-    font-weight: 600;
-    color: var(--primary-color);
     border: 2px solid transparent;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease;
 }
 
 .skill-item:hover {
     border-color: var(--primary-color);
-    background-color: var(--bg-light);
-    transform: translateY(-5px);
+}
+
+.skill-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    background-color: var(--primary-color);
+    opacity: 0.6;
+    transition: width 1s ease;
+    z-index: 0;
+}
+
+.skill-item:hover::after {
+    width: 0%;
+}
+
+.html:hover::after {
+    width: 90%;
+}
+
+.css:hover::after {
+    width: 90%;
+}
+
+.js:hover::after {
+    width: 80%;
+}
+
+.react:hover::after {
+    width: 80%;
+}
+
+.figma:hover::after {
+    width: 80%;
+}
+
+.skill-item span {
+    font-weight: 600;
+    margin: auto;
+    color: var(--primary-color);
+    transition: transform .4s ease;
+    z-index: 1;
+}
+
+.skill-item:hover span {
+    transform: translateY(-6px);
+}
+
+.percent {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 1;
+}
+
+.skill-item:hover .percent {
+    opacity: 1;
 }
 
 /* ==================== PROJECTS SECTION ==================== */
@@ -388,7 +453,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(79, 195, 247, 0.95), rgba(41, 182, 246, 0.95));
+    background: linear-gradient(105deg, rgba(79, 195, 247, 0.95), rgba(41, 182, 246, 0.95));
     padding: 2rem;
     display: flex;
     align-items: center;
