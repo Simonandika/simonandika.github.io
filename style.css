@@ -373,6 +373,14 @@ body {
     font-weight: 600;
 }
 
+.click-prompt {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
 /* Highlight Overlay */
 .card-highlight {
     position: absolute;
@@ -436,6 +444,32 @@ body {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.8);
     margin-top: 0.25rem;
+}
+
+/* Kotak preview */
+.preview-container {
+    width: 100%;           /* sesuai layout project card */
+    height: 200px;          /* tinggi kotak yang terlihat */
+    overflow: hidden;       /* sembunyikan bagian gambar di luar kotak */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.preview-image { 
+    width:100%; 
+    transition: transform 5s linear; 
+}
+
+.hover-preview:hover .preview-image { 
+    cursor: pointer;
+    transform: translateY(-50%); 
+    animation: scrollPreview 7s linear infinite; 
+}
+
+@keyframes scrollPreview {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
 }
 
 /* ==================== CONTACT SECTION ==================== */
@@ -698,62 +732,7 @@ body {
 .project-card.fade-up {
     animation-delay: calc(var(--card-index, 0) * 0.1s);
 }
-
-/* ==================== RESPONSIVE DESIGN ==================== */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0 1rem;
-        height: 60px;
-    }
-
-    .navbar-logo {
-        font-size: 1.3rem;
-        margin-right: 1rem;
-    }
-
-    .nav-links {
-        gap: 1rem;
-        flex: none;
-    }
-
-    .nav-link {
-        font-size: 0.85rem;
-        padding: 0.4rem 0.8rem;
-    }
-
-    .nav-link.active::after {
-        display: none;
-    }
-
-    .nav-link.active {
-        color: var(--primary-color);
-        background-color: var(--bg-gray);
-        border-radius: 6px;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-links {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        flex-direction: column;
-        background-color: var(--bg-light);
-        border-bottom: 1px solid var(--border-color);
-        margin: 0;
-        padding: 1rem;
-        gap: 0;
-        transition: all 0.3s ease;
-        max-height: 0;
-        overflow: hidden;
-    }
-
+.preview-image { 
     .nav-links.show {
         opacity: 1;
         visibility: visible;

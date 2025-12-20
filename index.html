@@ -36,71 +36,56 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content main-content-top">
+    <main class="main-content">
         <!-- Home Section -->
         <section id="home" class="section hero">
             <div class="hero-content">
-                <h1 class="fade-up">Welcome to My Portfolio</h1>
-                <p class="fade-up">Full Stack Developer & Designer</p>
-                <button class="cta-button fade-up">Let's Connect</button>
+                <h1>Welcome to My Portfolio</h1>
+                <p>Full Stack Developer & Designer</p>
+                <button class="cta-button">Let's Connect</button>
             </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="section">
-            <h2 class="section-title fade-up">About Me</h2>
-            <div class="about-content fade-up">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
                 <p>I'm a passionate developer who loves creating beautiful and functional web experiences. With expertise in modern web technologies, I help businesses bring their ideas to life.</p>
                 <div class="skills">
-                    <div class="skill-item fade-up">HTML</div>
-                    <div class="skill-item fade-up">CSS</div>
-                    <div class="skill-item fade-up">JavaScript</div>
-                    <div class="skill-item fade-up">React</div>
-                    <div class="skill-item fade-up">Node.js</div>
-                    <div class="skill-item fade-up">Figma</div>
+                    <div class="skill-item">HTML</div>
+                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">React</div>
+                    <div class="skill-item">Node.js</div>
+                    <div class="skill-item">Figma</div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
         <section id="projects" class="section">
-            <h2 class="section-title fade-up">Featured Projects</h2>
+            <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card fade-up" data-id="1">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200?text=Project+1" alt="Project 1">
+
+                <!-- Project 1 -->
+                <div class="project-card hover-preview" onclick="window.open('https://ros-architect.web.id', '_blank')">
+                    <div class="preview-container">
+                        <img src="./assets/ROS.jpeg" class="preview-image">
                     </div>
                     <div class="card-content">
-                        <h3>E-Commerce Platform</h3>
-                        <p>A modern online shopping platform with cart functionality</p>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                    </div>
-                    <div class="card-highlight">
-                        <div class="highlight-content">
-                            <h4>E-Commerce Platform</h4>
-                            <p>Built with React and Node.js featuring real-time inventory management, secure payment integration, and responsive design.</p>
-                            <div class="highlight-stats">
-                                <div class="stat">
-                                    <span class="stat-number">5K+</span>
-                                    <span class="stat-label">Users</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">99%</span>
-                                    <span class="stat-label">Uptime</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">30%</span>
-                                    <span class="stat-label">Conversion</span>
-                                </div>
-                            </div>
-                        </div>
+                        <h3>Architecture Portfolio</h3>
+                        <!-- <p>My First Portfolio</p> -->
+                        <p class="click-prompt">Click to view the full portfolio</p>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
                     </div>
                 </div>
 
-                <div class="project-card fade-up" data-id="2">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200?text=Project+2" alt="Project 2">
+                <!-- Project 2 -->
+                <div class="project-card hover-preview" onclick="window.open('#')">
+                    <div class="preview-container">
+                        <img src="https://via.placeholder.com/300x600?text=Social+Media+App" alt="Social Media App" class="preview-image">
                     </div>
                     <div class="card-content">
                         <h3>Social Media App</h3>
@@ -108,31 +93,12 @@
                         <span class="tech-tag">React Native</span>
                         <span class="tech-tag">Firebase</span>
                     </div>
-                    <div class="card-highlight">
-                        <div class="highlight-content">
-                            <h4>Social Media App</h4>
-                            <p>Mobile-first social platform with real-time messaging, post sharing, and user authentication using Firebase.</p>
-                            <div class="highlight-stats">
-                                <div class="stat">
-                                    <span class="stat-number">10K+</span>
-                                    <span class="stat-label">Downloads</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">4.8</span>
-                                    <span class="stat-label">Rating</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">2M</span>
-                                    <span class="stat-label">Messages</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="project-card fade-up" data-id="3">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3">
+                <!-- Project 3 -->
+                <div class="project-card hover-preview" onclick="window.open('#')">
+                    <div class="preview-container">
+                        <img src="https://via.placeholder.com/300x600?text=Analytics+Dashboard" alt="Analytics Dashboard" class="preview-image">
                     </div>
                     <div class="card-content">
                         <h3>Analytics Dashboard</h3>
@@ -140,31 +106,12 @@
                         <span class="tech-tag">Vue.js</span>
                         <span class="tech-tag">D3.js</span>
                     </div>
-                    <div class="card-highlight">
-                        <div class="highlight-content">
-                            <h4>Analytics Dashboard</h4>
-                            <p>Comprehensive analytics dashboard with interactive charts, real-time data updates, and customizable reports.</p>
-                            <div class="highlight-stats">
-                                <div class="stat">
-                                    <span class="stat-number">50+</span>
-                                    <span class="stat-label">Metrics</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">100K</span>
-                                    <span class="stat-label">Data Points</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">1000</span>
-                                    <span class="stat-label">Happy Users</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="project-card fade-up" data-id="4">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200?text=Project+4" alt="Project 4">
+                <!-- Project 4 -->
+                <div class="project-card hover-preview" onclick="window.open('#')">
+                    <div class="preview-container">
+                        <img src="https://via.placeholder.com/300x600?text=Task+Management+Tool" alt="Task Management Tool" class="preview-image">
                     </div>
                     <div class="card-content">
                         <h3>Task Management Tool</h3>
@@ -172,31 +119,12 @@
                         <span class="tech-tag">TypeScript</span>
                         <span class="tech-tag">MongoDB</span>
                     </div>
-                    <div class="card-highlight">
-                        <div class="highlight-content">
-                            <h4>Task Management Tool</h4>
-                            <p>Collaborative project management tool with team workspaces, task assignments, and progress tracking.</p>
-                            <div class="highlight-stats">
-                                <div class="stat">
-                                    <span class="stat-number">500+</span>
-                                    <span class="stat-label">Teams</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">50K</span>
-                                    <span class="stat-label">Tasks</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">95%</span>
-                                    <span class="stat-label">Productivity</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="project-card fade-up" data-id="5">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200?text=Project+5" alt="Project 5">
+                <!-- Project 5 -->
+                <div class="project-card hover-preview" onclick="window.open('#')">
+                    <div class="preview-container">
+                        <img src="https://via.placeholder.com/300x600?text=Weather+App" alt="Weather App" class="preview-image">
                     </div>
                     <div class="card-content">
                         <h3>Weather App</h3>
@@ -204,31 +132,12 @@
                         <span class="tech-tag">Vue.js</span>
                         <span class="tech-tag">API</span>
                     </div>
-                    <div class="card-highlight">
-                        <div class="highlight-content">
-                            <h4>Weather App</h4>
-                            <p>Beautiful weather application with real-time updates, hourly forecasts, and multi-location support.</p>
-                            <div class="highlight-stats">
-                                <div class="stat">
-                                    <span class="stat-number">1M+</span>
-                                    <span class="stat-label">Checks</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">100K</span>
-                                    <span class="stat-label">Active Users</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">195</span>
-                                    <span class="stat-label">Countries</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="project-card fade-up" data-id="6">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200?text=Project+6" alt="Project 6">
+                <!-- Project 6 -->
+                <div class="project-card hover-preview" onclick="window.open('#')">
+                    <div class="preview-container">
+                        <img src="https://via.placeholder.com/300x600?text=Learning+Platform" alt="Learning Platform" class="preview-image">
                     </div>
                     <div class="card-content">
                         <h3>Learning Platform</h3>
@@ -236,34 +145,15 @@
                         <span class="tech-tag">React</span>
                         <span class="tech-tag">Python</span>
                     </div>
-                    <div class="card-highlight">
-                        <div class="highlight-content">
-                            <h4>Learning Platform</h4>
-                            <p>Comprehensive online learning platform with video courses, quizzes, certificates, and progress tracking.</p>
-                            <div class="highlight-stats">
-                                <div class="stat">
-                                    <span class="stat-number">100+</span>
-                                    <span class="stat-label">Courses</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">50K</span>
-                                    <span class="stat-label">Students</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">90%</span>
-                                    <span class="stat-label">Satisfaction</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
             </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="section">
-            <h2 class="section-title fade-up">Get In Touch</h2>
-            <div class="contact-content fade-up">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
                 <p>Have a project in mind? Let's talk!</p>
                 <form class="contact-form">
                     <input type="text" placeholder="Your Name" required>
@@ -272,27 +162,13 @@
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </section>
     </main>
-
-    <!-- 404 Page (Hidden by default) -->
-    <div id="notFoundPage" class="not-found-page">
-        <div class="not-found-container">
-            <div class="animated-404">
-                <div class="digit">4</div>
-                <div class="animated-emoji">😵</div>
-                <div class="digit">4</div>
-            </div>
-            <h1>Oops! Page Not Found</h1>
-            <p>The page you're looking for seems to have wandered off...</p>
-            <button class="back-home-btn">Back to Home</button>
-        </div>
-    </div>
 
     <script src="main.js"></script>
 </body>
