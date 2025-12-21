@@ -32,6 +32,66 @@
     --grid-color: rgba(0, 0, 0, 0.1);
 }
 
+/* ==================== VISITOR COUNTER STYLES ==================== */
+.visitor-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(41, 182, 246, 0.1));
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(79, 195, 247, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.visitor-counter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.visitor-counter:hover::before {
+    left: 100%;
+}
+
+.visitor-counter:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(79, 195, 247, 0.15);
+    border-color: rgba(79, 195, 247, 0.3);
+}
+
+.visitor-counter i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    filter: drop-shadow(0 0 8px rgba(79, 195, 247, 0.3));
+}
+
+#visitor-count {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px rgba(79, 195, 247, 0.3);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.visitor-counter span:last-child {
+    color: var(--text-light);
+    font-weight: 500;
+    opacity: 0.9;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -846,6 +906,21 @@ body {
     }
 }
 
+@keyframes countUp {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 .fade-up {
     animation: fadeUp 0.8s ease forwards;
     opacity: 0;
@@ -971,6 +1046,21 @@ body {
         font-size: 1rem;
     }
 
+    .visitor-counter {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+        gap: 0.5rem;
+    }
+
+    .visitor-counter i {
+        font-size: 0.9rem;
+    }
+
+    #visitor-count {
+        font-size: 0.9rem;
+    }
+
     .section-title {
         font-size: 1.5rem;
     }
@@ -1010,6 +1100,20 @@ body {
 
     .hero-text p {
         font-size: 1.5rem;
+    }
+
+    .visitor-counter {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .visitor-counter i {
+        font-size: 1rem;
+    }
+
+    #visitor-count {
+        font-size: 1rem;
     }
 
     .cta-button {

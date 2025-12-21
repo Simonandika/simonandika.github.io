@@ -229,4 +229,194 @@ if (aboutElement) {
     typeWriter(aboutElement, aboutText, 50);
 }
 
+// ==================== VISITOR COUNTER ====================
+// Initialize Supabase client
+const supabaseUrl = 'YOUR_SUPABASE_URL'; // Replace with your Supabase project URL
+const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'; // Replace with your Supabase anon key
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+// Function to generate device fingerprint
+function generateDeviceFingerprint() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillText('Fingerprint', 2, 2);
+    
+    const fingerprint = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screenResolution: `${screen.width}x${screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        canvas: canvas.toDataURL(),
+        cookieEnabled: navigator.cookieEnabled,
+        doNotTrack: navigator.doNotTrack
+    };
+    
+    // Create hash from fingerprint
+    let hash = 0;
+    const str = JSON.stringify(fingerprint);
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32-bit integer
+    }
+    
+    return Math.abs(hash).toString(36);
+}
+
+// Function to get total visitor count
+async function getVisitorCount() {
+    try {
+        const { count, error } = await supabase
+            .from('visitors')
+            .select('*', { count: 'exact', head: true });
+        
+        if (error) {
+            console.error('Error fetching visitor count:', error);
+            return 0;
+        }
+        
+        return count || 0;
+    } catch (error) {
+        console.error('Error fetching visitor count:', error);
+        return 0;
+    }
+}
+
+// Function to check if device already visited
+async function hasDeviceVisited(deviceId) {
+    try {
+        const { data, error } = await supabase
+            .from('visitors')
+            .select('id')
+            .eq('device_id', deviceId)
+            .single();
+        
+        if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
+            console.error('Error checking device visit:', error);
+            return false;
+        }
+        
+        return !!data;
+    } catch (error) {
+        console.error('Error checking device visit:', error);
+        return false;
+    }
+}
+
+// Function to record device visit
+async function recordDeviceVisit(deviceId) {
+    try {
+        const { data, error } = await supabase
+            .from('visitors')
+            .insert([{
+                device_id: deviceId,
+                user_agent: navigator.userAgent,
+                screen_resolution: `${screen.width}x${screen.height}`,
+                language: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                last_visit: new Date().toISOString(),
+                visit_count: 1
+            }])
+            .select();
+        
+        if (error) {
+            console.error('Error recording device visit:', error);
+            return false;
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Error recording device visit:', error);
+        return false;
+    }
+}
+
+// Function to update device visit count
+async function updateDeviceVisit(deviceId) {
+    try {
+        // Get current visit count
+        const { data: currentData, error: selectError } = await supabase
+            .from('visitors')
+            .select('visit_count')
+            .eq('device_id', deviceId)
+            .single();
+        
+        if (selectError) {
+            console.error('Error getting current visit count:', selectError);
+            return false;
+        }
+        
+        // Update visit count and last visit
+        const { error: updateError } = await supabase
+            .from('visitors')
+            .update({
+                visit_count: (currentData.visit_count || 0) + 1,
+                last_visit: new Date().toISOString()
+            })
+            .eq('device_id', deviceId);
+        
+        if (updateError) {
+            console.error('Error updating device visit:', updateError);
+            return false;
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Error updating device visit:', error);
+        return false;
+    }
+}
+
+// Initialize visitor counter
+async function initVisitorCounter() {
+    const deviceId = generateDeviceFingerprint();
+    const visitorCountElement = document.getElementById('visitor-count');
+    
+    // Check if this device already visited today (using localStorage)
+    const today = new Date().toDateString();
+    const lastVisitKey = `lastVisit_${deviceId}`;
+    const lastVisitDate = localStorage.getItem(lastVisitKey);
+    
+    let shouldCount = false;
+    
+    if (lastVisitDate !== today) {
+        // First visit today or new device
+        const hasVisited = await hasDeviceVisited(deviceId);
+        
+        if (!hasVisited) {
+            // New device, record it
+            await recordDeviceVisit(deviceId);
+            shouldCount = true;
+        } else {
+            // Existing device, update visit count
+            await updateDeviceVisit(deviceId);
+            shouldCount = true;
+        }
+        
+        // Mark as visited today
+        localStorage.setItem(lastVisitKey, today);
+    }
+    
+    // Always show total count
+    const totalCount = await getVisitorCount();
+    if (visitorCountElement) {
+        visitorCountElement.textContent = totalCount.toLocaleString();
+        
+        // Add count-up animation
+        visitorCountElement.style.animation = 'countUp 0.8s ease-out';
+    }
+    
+    if (shouldCount) {
+        console.log('New visit recorded for device:', deviceId);
+    }
+}
+
+// Initialize on page load
+window.addEventListener('load', () => {
+    initVisitorCounter();
+});
+
 console.log('Portfolio loaded successfully! 🚀');
