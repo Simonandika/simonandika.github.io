@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
 </head>
 <body>
     <!-- Top Navigation -->
@@ -41,12 +42,12 @@
         <!-- Home Section -->
         <section id="home" class="section hero">
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-text" data-aos="fade-right">
                     <h1>Welcome to My Portfolio</h1>
                     <p>I am a Front End Developer</p>
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=simonandika2309@gmail.com" target="_blank" class="cta-button" style="text-decoration: none;">Hire Me <i class="fas fa-envelope" style="margin-top: 4px"></i></a>
                 </div>
-                <div class="hero-image">
+                <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
                     <img src="./assets/myFoto.png" alt="My Photo" class="profile-photo">
                 </div>
             </div>
@@ -55,10 +56,10 @@
         <!-- About Section -->
         <section id="about" class="section">
             
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
+            <h2 class="section-title" data-aos="fade-right">About Me</h2>
+            <div class="about-content" data-aos="fade-right" data-aos-delay="200">
                 <p id="about-text"></p>
-                <div class="skills">
+                <div class="skills" data-aos="fade-right" data-aos-delay="400">
                     <div class="skill-item html" style="--percent: 90%">
                         <span>HTML</span>
                         <span class="percent">90%</span>
@@ -86,7 +87,7 @@
         <!-- Projects Section -->
         <section id="projects" class="section">
             <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
+            <div class="projects-grid" data-aos="fade-up">
 
                 <!-- Project 1 -->
                 <div class="project-card hover-preview" onclick="window.open('https://ros-architect.web.id', '_blank')">
@@ -104,13 +105,13 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card hover-preview" onclick="window.open('#')">
-                    <div class="preview-container">
-                        <img src="https://picsum.photos/300/200?random=1" alt="Social Media App" class="preview-image">
+                <div class="project-card" onclick="window.open('./dist/index.html', '_blank')">
+                    <div class="preview-container full-preview">
+                        <img style="height: 200px;" src="./assets/SafeTalk.jpeg" alt="Social Media App" class="preview-image">
                     </div>
                     <div class="card-content">
                         <h3>Social Media App</h3>
-                        <p>Connect with friends and share your moments</p>
+                        <p>Click here to review the app</p>
                         <span class="tech-tag">React JS</span>
                         
                     </div>
@@ -122,10 +123,10 @@
                         <img src="https://picsum.photos/300/200?random=2" alt="Analytics Dashboard" class="preview-image">
                     </div>
                     <div class="card-content">
-                        <h3>Analytics Dashboard</h3>
-                        <p>Real-time data visualization and insights</p>
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">D3.js</span>
+                        <h3>Waiting</h3>
+                        <p>Waiting For New App</p>
+                        <span class="tech-tag">..</span>
+                        <span class="tech-tag">..</span>
                     </div>
                 </div>
 
@@ -133,8 +134,8 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="section">
-            <h2 class="section-title">Get In Touch</h2>
+        <section id="contact" class="section" data-aos="fade-up">
+            <h2 class="section-title" >Get In Touch</h2>
             <div class="contact-content">
                 <p>Have a project in mind? Let's talk!</p>
                 <form class="contact-form">
@@ -153,5 +154,14 @@
     </main>
 
     <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 0,
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
 </body>
 </html>

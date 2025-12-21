@@ -47,6 +47,7 @@ body {
     color: var(--text-dark);
     background-color: var(--bg-light);
     transition: background-color 0.3s ease, color 0.3s ease;
+   
     overflow-x: hidden;
 }
 
@@ -224,12 +225,14 @@ body {
 }
 
 .hero {
+    
     text-align: center;
     background-image: 
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 50px 50px;
-    min-height: calc(100vh - 70px);
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 0 0;
+    min-height: calc(100vh - 30px);
     justify-content: space-between;
 }
 
@@ -237,7 +240,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    
 }
 
 .hero-text {
@@ -459,6 +462,7 @@ body {
 .project-card:hover {
     box-shadow: var(--shadow-hover);
     transform: translateY(-10px);
+    cursor: pointer;
 }
 
 .card-image {
@@ -589,6 +593,11 @@ body {
     height: 200px;          /* tinggi kotak yang terlihat */
     overflow: hidden;       /* sembunyikan bagian gambar di luar kotak */
     border-radius: 8px;
+}
+
+.full-preview {
+    height: 200px !important;
+    overflow: visible !important;
 }
 
 .preview-image {
