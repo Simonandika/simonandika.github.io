@@ -237,7 +237,6 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 let supabaseClient = null;
 if (supabaseUrl && supabaseKey && supabaseUrl !== 'YOUR_SUPABASE_URL' && supabaseKey !== 'YOUR_SUPABASE_ANON_KEY') {
     supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-    console.log('Supabase initialized successfully');
 } else {
     console.warn('Supabase not configured. Please replace YOUR_SUPABASE_URL and YOUR_SUPABASE_ANON_KEY with your actual Supabase credentials.');
 }// Function to generate device fingerprint
@@ -400,8 +399,6 @@ async function initVisitorCounter() {
     const deviceId = generateDeviceFingerprint();
     const visitorCountElement = document.getElementById('visitor-count');
     
-    console.log('Device ID generated:', deviceId);
-    
     if (!supabaseClient) {
         console.warn('Supabase not configured. Visitor counter will show 0.');
         if (visitorCountElement) {
@@ -417,42 +414,31 @@ async function initVisitorCounter() {
     const lastVisitKey = `lastVisit_${deviceId}`;
     const lastVisitDate = localStorage.getItem(lastVisitKey);
     
-    console.log('Today:', today);
-    console.log('Last visit date:', lastVisitDate);
-    
     let shouldCount = false;
     
     if (lastVisitDate !== today) {
-        console.log('First visit today or new device, checking database...');
         // First visit today or new device
         const hasVisited = await hasDeviceVisited(deviceId);
-        console.log('Has device visited before:', hasVisited);
         
         if (!hasVisited) {
             // New device, record it
-            console.log('Recording new device visit...');
             const success = await recordDeviceVisit(deviceId);
-            console.log('Record success:', success);
             shouldCount = success;
         } else {
             // Existing device, update visit count
             console.log('Updating existing device visit...');
             const success = await updateDeviceVisit(deviceId);
-            console.log('Update success:', success);
             shouldCount = success;
         }
         
         // Mark as visited today
         localStorage.setItem(lastVisitKey, today);
-        console.log('Marked as visited today');
     } else {
-        console.log('Device already visited today, skipping count');
+        // Device already visited today, skipping count
     }
     
     // Always show total count
-    console.log('Fetching total visitor count...');
     const totalCount = await getVisitorCount();
-    console.log('Total visitor count:', totalCount);
     
     if (visitorCountElement) {
         visitorCountElement.textContent = totalCount.toLocaleString();
@@ -462,7 +448,7 @@ async function initVisitorCounter() {
     }
     
     if (shouldCount) {
-        console.log('New visit recorded for device:', deviceId);
+        // New visit recorded
     }
 }
 
@@ -488,5 +474,3 @@ skillItems.forEach(item => {
         span.textContent = originalText;
     });
 });
-
-console.log('Portfolio loaded successfully! 🚀');
