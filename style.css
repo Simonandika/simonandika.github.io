@@ -1101,7 +1101,11 @@ body {
     .hero-text p {
         font-size: 1.5rem;
     }
-
+    .visitor-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .visitor-counter {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
@@ -1117,7 +1121,7 @@ body {
     }
 
     .cta-button {
-        margin: 3.5rem;
+        margin: 0 3rem 0 3rem;
         display: flex;
         gap: 5px;
         justify-content: center;
