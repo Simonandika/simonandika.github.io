@@ -231,11 +231,16 @@ if (aboutElement) {
 
 // ==================== VISITOR COUNTER ====================
 // Initialize Supabase client
-const supabaseUrl = 'YOUR_SUPABASE_URL'; // Replace with your Supabase project URL
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'; // Replace with your Supabase anon key
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = 'https://qidebeiffjbnjgkzbwtw.supabase.co'; // Replace with your Supabase project URL
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpZGViZWlmZmpibmpna3pid3R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYzNTM2MjMsImV4cCI6MjA4MTkyOTYyM30.4YIJjks7L7QJAFL9bZ1gbVvDJd2hIOxUazbrpz5rfTc'; // Replace with your Supabase anon key
 
-// Function to generate device fingerprint
+let supabaseClient = null;
+if (supabaseUrl && supabaseKey && supabaseUrl !== 'YOUR_SUPABASE_URL' && supabaseKey !== 'YOUR_SUPABASE_ANON_KEY') {
+    supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+    console.log('Supabase initialized successfully');
+} else {
+    console.warn('Supabase not configured. Please replace YOUR_SUPABASE_URL and YOUR_SUPABASE_ANON_KEY with your actual Supabase credentials.');
+}// Function to generate device fingerprint
 function generateDeviceFingerprint() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -268,8 +273,13 @@ function generateDeviceFingerprint() {
 
 // Function to get total visitor count
 async function getVisitorCount() {
+    if (!supabaseClient) {
+        console.warn('Supabase not configured, returning 0');
+        return 0;
+    }
+    
     try {
-        const { count, error } = await supabase
+        const { count, error } = await supabaseClient
             .from('visitors')
             .select('*', { count: 'exact', head: true });
         
@@ -287,8 +297,13 @@ async function getVisitorCount() {
 
 // Function to check if device already visited
 async function hasDeviceVisited(deviceId) {
+    if (!supabaseClient) {
+        console.warn('Supabase not configured, returning false');
+        return false;
+    }
+    
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('visitors')
             .select('id')
             .eq('device_id', deviceId)
@@ -308,8 +323,13 @@ async function hasDeviceVisited(deviceId) {
 
 // Function to record device visit
 async function recordDeviceVisit(deviceId) {
+    if (!supabaseClient) {
+        console.warn('Supabase not configured, cannot record visit');
+        return false;
+    }
+    
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('visitors')
             .insert([{
                 device_id: deviceId,
@@ -336,9 +356,14 @@ async function recordDeviceVisit(deviceId) {
 
 // Function to update device visit count
 async function updateDeviceVisit(deviceId) {
+    if (!supabaseClient) {
+        console.warn('Supabase not configured, cannot update visit');
+        return false;
+    }
+    
     try {
         // Get current visit count
-        const { data: currentData, error: selectError } = await supabase
+        const { data: currentData, error: selectError } = await supabaseClient
             .from('visitors')
             .select('visit_count')
             .eq('device_id', deviceId)
@@ -350,7 +375,7 @@ async function updateDeviceVisit(deviceId) {
         }
         
         // Update visit count and last visit
-        const { error: updateError } = await supabase
+        const { error: updateError } = await supabaseClient
             .from('visitors')
             .update({
                 visit_count: (currentData.visit_count || 0) + 1,
@@ -375,33 +400,60 @@ async function initVisitorCounter() {
     const deviceId = generateDeviceFingerprint();
     const visitorCountElement = document.getElementById('visitor-count');
     
+    console.log('Device ID generated:', deviceId);
+    
+    if (!supabaseClient) {
+        console.warn('Supabase not configured. Visitor counter will show 0.');
+        if (visitorCountElement) {
+            visitorCountElement.textContent = '0';
+            visitorCountElement.style.color = '#ff6b6b';
+            visitorCountElement.style.animation = 'countUp 0.8s ease-out';
+        }
+        return;
+    }
+    
     // Check if this device already visited today (using localStorage)
     const today = new Date().toDateString();
     const lastVisitKey = `lastVisit_${deviceId}`;
     const lastVisitDate = localStorage.getItem(lastVisitKey);
     
+    console.log('Today:', today);
+    console.log('Last visit date:', lastVisitDate);
+    
     let shouldCount = false;
     
     if (lastVisitDate !== today) {
+        console.log('First visit today or new device, checking database...');
         // First visit today or new device
         const hasVisited = await hasDeviceVisited(deviceId);
+        console.log('Has device visited before:', hasVisited);
         
         if (!hasVisited) {
             // New device, record it
-            await recordDeviceVisit(deviceId);
-            shouldCount = true;
+            console.log('Recording new device visit...');
+            const success = await recordDeviceVisit(deviceId);
+            console.log('Record success:', success);
+            shouldCount = success;
         } else {
             // Existing device, update visit count
-            await updateDeviceVisit(deviceId);
-            shouldCount = true;
+            console.log('Updating existing device visit...');
+            const success = await updateDeviceVisit(deviceId);
+            console.log('Update success:', success);
+            shouldCount = success;
         }
         
         // Mark as visited today
         localStorage.setItem(lastVisitKey, today);
+        console.log('Marked as visited today');
+    } else {
+        console.log('Device already visited today, skipping count');
     }
     
     // Always show total count
+    console.log('Fetching total visitor count...');
     const totalCount = await getVisitorCount();
+    console.log('Total visitor count:', totalCount);
+    
     if (visitorCountElement) {
         visitorCountElement.textContent = totalCount.toLocaleString();
         
