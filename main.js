@@ -471,4 +471,22 @@ window.addEventListener('load', () => {
     initVisitorCounter();
 });
 
+// Skill hover effect
+const skillItems = document.querySelectorAll('.skill-item');
+
+skillItems.forEach(item => {
+    const span = item.querySelector('span:not(.percent)');
+    const percent = item.querySelector('.percent');
+    const originalText = span.textContent;
+    const percentText = percent.textContent;
+
+    item.addEventListener('mouseenter', () => {
+        span.textContent = percentText;
+    });
+
+    item.addEventListener('mouseleave', () => {
+        span.textContent = originalText;
+    });
+});
+
 console.log('Portfolio loaded successfully! 🚀');
